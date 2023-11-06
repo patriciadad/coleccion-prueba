@@ -4,7 +4,7 @@ const config = {
         host: "localhost",
         user: "root",
         password: "",
-        database: "bdgestion",
+        database: "basedatos",
         connectTimeout: "60000"
     },
 }
