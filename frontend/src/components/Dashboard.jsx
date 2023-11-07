@@ -1,4 +1,5 @@
-import { Button, TextField, Paper, Alert, Container, Dialog, DialogTitle, DialogContent, DialogActions, Grid} from "@mui/material";
+import { Button, Box, TextField, Paper, Container, Dialog, DialogTitle, DialogContent, DialogActions, Grid} from "@mui/material";
+import MuiAlert from '@mui/material/Alert';
 import { Table, TableContainer, TableHead, TableCell, TableRow, TableBody, TableContent} from "@mui/material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import React from "react";
@@ -9,7 +10,7 @@ const itemInitialState = {
     nombre: '',
     marca: '',
     tipo: '', 
-    precio: 0
+    precio: ''
 }
 
 
@@ -23,12 +24,14 @@ function Dashboard(){
     const handleSaveItem = (e) => {
         //Para que no mande el formulario, sino que haga lo que yo le diga
     e.preventDefault();
-    <Alert severity='success'>Datos insertados con éxito</Alert>
+    
     fetch(`http://localhost:3030/addItem?id=${item.id}&nombre=${item.nombre}&marca=${item.marca}&tipo=${item.tipo}&precio=${item.precio}`)
     .then(response => response.json())
     .then(response => {
         if (response>0){
-            <Alert>Datos insertados con éxito</Alert>
+            setItem(itemInitialState)
+            alert('Datos guardados con éxito')
+            //<MuiAlert>Datos insertados con éxito</MuiAlert>
             fetch(`http://localhost:3030/getItems`)
             .then(res => res.json()) 
             .then(res => {
@@ -39,13 +42,15 @@ function Dashboard(){
     })
 }
 
-const handleDeleteItem = ()=> {
-
-    fetch(`http://localhost:3030/deleteItem?id=${item.id}`)
+const handleDeleteItem = (data)=> {
+    console.log(data.id)
+    fetch(`http://localhost:3030/deleteItem?id=${data.id}`)
     .then(response => response.json())
     .then(response => {
         if (response>0){
-            <Alert>Datos borrados con éxito</Alert>
+            console.log(response)
+            alert('Datos borrados con éxito')
+            //<MuiAlert>Datos borrados con éxito</MuiAlert>
             fetch(`http://localhost:3030/getItems`)
             .then(res => res.json()) 
             .then(res => {
@@ -84,9 +89,9 @@ const handleDeleteItem = ()=> {
 
     }*/
     return <>
-    
     <Paper elevation={3} sx={{mb:'25px'}}>
-    <Grid container spacing={2} sx={{mt:'20px'}} component='form' autoComplete='off' onSubmit={handleSaveItem}>
+    <Box  component='form' autoComplete='off' onSubmit={handleSaveItem} >
+    <Grid container spacing={2} sx={{mt:'20px'}}>
         <Grid item xs={12} md={3} sx={{textAlign:'center'}}> 
             <TextField
                 label='Nombre'
@@ -128,26 +133,27 @@ const handleDeleteItem = ()=> {
 
         </Grid>
         <Grid item xs={12} sx={{textAlign:'center'}}>
-        <Button sx={{textAlign:'center'}} variant='outlined' type='submit'> 
+        <Button sx={{textAlign:'center', bgcolor:'black', color:'white'}} variant='outlined' type='submit'> 
             + INSERTAR DATOS
         </Button>
         </Grid>
     </Grid>
-   
+    </Box>
     </Paper>
         
     
     
         <TableContainer component={Paper} sx={{mb:'25px'}}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="Tabla resultados">
         <TableHead>
             <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Marca</TableCell>
-                <TableCell>Tipo</TableCell>
-                <TableCell>Precio</TableCell>
-                <TableCell></TableCell>
+                <TableCell sx={{bgcolor:'black'}}></TableCell>
+                <TableCell sx={{bgcolor:'black', color:'white'}}>Nombre</TableCell>
+                <TableCell sx={{bgcolor:'black', color:'white'}}>Marca</TableCell>
+                <TableCell sx={{bgcolor:'black', color:'white'}}>Tipo</TableCell>
+                <TableCell sx={{bgcolor:'black', color:'white'}}>Precio</TableCell>
+                <TableCell sx={{bgcolor:'black', color:'white'}}></TableCell>
+                
             </TableRow>
         </TableHead>
         <TableBody>
@@ -162,6 +168,7 @@ const handleDeleteItem = ()=> {
                     <TableCell>{row.marca}</TableCell>
                     <TableCell>{row.tipo}</TableCell>
                     <TableCell>{row.precio}</TableCell>
+                    
 
                 </TableRow>
 

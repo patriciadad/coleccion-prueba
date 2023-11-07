@@ -33,6 +33,7 @@ async function insertData (req, res) {
 
 async function deleteData (req, res) {
     const data  = req.query
+    console.log(data.id)
     const result = await db.query(
         `DELETE FROM basedatos
         WHERE id = ${data.id}`

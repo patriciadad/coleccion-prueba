@@ -59,7 +59,7 @@ app.get('/addItem', async function(req, res, next) {
 })
 
 app.get('/deleteItem', async function(req, res, next) {
-    console.log(req)
+    // console.log(req)
     try {
         res.json(await items.deleteData(req))
     } catch (err) {

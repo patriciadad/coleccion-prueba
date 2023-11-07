@@ -47,7 +47,7 @@ return <>
       <Container maxWidth="xl">
         <Toolbar >
             <Grid container>
-            <Grid item xs={12} md={2}>
+            <Grid item xs={12} md={2} lg={2}>
             <AdbIcon  />
           
           
@@ -61,20 +61,20 @@ return <>
           </Typography>
           </Grid>
           <Grid item xs={12} md={2}>  
-          <Link to={'/home'} sx={{textDecoration:'none'}}>Inicio</Link>
+          <Link to={'/home'} style={{textDecoration:'none', color:'white'}}>Inicio</Link>
           </Grid>
           <Grid item xs={12} md={2}>  
-          <Link to={'/informes'}>Informes</Link>
+          <Link to={'/informes'} style={{textDecoration:'none', color:'white'}}>Informes</Link>
           </Grid>
           <Grid item xs={12} md={4} >  
-          <Link to={'/GuiaUsuario.pdf'} target='_blank'>Ayuda</Link>
+          <Link to={'/GuiaUsuario.pdf'} style={{textDecoration:'none', color:'white'}} target='_blank'>Ayuda</Link>
           </Grid>
 
           <Grid item xs={12} md={2} sx={{textAlign:'right'}}>  
           <Button
             variant = 'contained' 
             type = 'button'
-            color = 'error'
+            sx={{bgcolor: 'grey', color:'white'}}
             onClick = {handleLogout}
           >
             Salir  
